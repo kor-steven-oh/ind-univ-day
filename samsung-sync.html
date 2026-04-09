@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAMSUNG SYNC 2026 — S.LSI University Network for Collaboration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:     #1428A0;
+      --blue-mid: #1A3FC4;
+      --blue-lt:  #2E5FE8;
+      --cyan:     #00C4CC;
+      --gold:     #F2A900;
+      --white:    #FFFFFF;
+      --gray-100: #F5F7FA;
+      --gray-200: #E8ECF2;
+      --gray-500: #8A92A6;
+      --gray-800: #1C2033;
+      --dark:     #0C1240;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      color: var(--gray-800);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(12,18,64,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--blue-lt), var(--cyan));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 14px; color: #fff; letter-spacing: -1px;
+    }
+    .nav-logo span {
+      font-weight: 700; font-size: 15px; color: #fff; letter-spacing: 2px;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,.7); letter-spacing: .5px;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--blue-lt), var(--cyan));
+      color: #fff; font-size: 13px; font-weight: 600;
+      border: none; border-radius: 24px; padding: 8px 22px;
+      cursor: pointer; letter-spacing: .5px; transition: opacity .2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: var(--dark);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 100px 24px 80px;
+      text-align: center;
+    }
+
+    /* Grid lines */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(46,95,232,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,95,232,.12) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 40%, transparent 100%);
+    }
+
+    /* Glowing blobs */
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
+    }
+    .blob-1 {
+      width: 600px; height: 600px;
+      background: rgba(20,40,160,.5);
+      top: -100px; left: -150px;
+    }
+    .blob-2 {
+      width: 500px; height: 500px;
+      background: rgba(0,196,204,.25);
+      top: 50px; right: -100px;
+    }
+    .blob-3 {
+      width: 400px; height: 400px;
+      background: rgba(242,169,0,.15);
+      bottom: -50px; left: 30%;
+    }
+
+    /* Floating dots decoration */
+    .dots-grid {
+      position: absolute; top: 120px; right: 80px;
+      display: grid; grid-template-columns: repeat(6,1fr); gap: 12px;
+      opacity: .25;
+    }
+    .dots-grid span {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--cyan); display: block;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(46,95,232,.2);
+      border: 1px solid rgba(46,95,232,.4);
+      border-radius: 24px; padding: 6px 16px; margin-bottom: 32px;
+      position: relative; z-index: 1;
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--cyan); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{opacity:1; transform:scale(1);}
+      50%{opacity:.4; transform:scale(.7);}
+    }
+    .hero-badge span {
+      font-size: 12px; font-weight: 600; color: var(--cyan); letter-spacing: 2px;
+    }
+
+    .hero-title {
+      position: relative; z-index: 1;
+      font-size: clamp(52px, 8vw, 100px);
+      font-weight: 900; line-height: 1;
+      letter-spacing: -3px; color: #fff;
+      margin-bottom: 16px;
+    }
+    .hero-title .samsung { color: var(--white); }
+    .hero-title .sync {
+      background: linear-gradient(90deg, var(--blue-lt), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle-full {
+      position: relative; z-index: 1;
+      font-size: 14px; font-weight: 500; letter-spacing: 3px;
+      color: rgba(255,255,255,.45); margin-bottom: 24px; text-transform: uppercase;
+    }
+
+    .hero-desc {
+      position: relative; z-index: 1;
+      max-width: 600px; font-size: 18px; line-height: 1.7;
+      color: rgba(255,255,255,.72); margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .hero-meta {
+      position: relative; z-index: 1;
+      display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .hero-meta-item { text-align: center; }
+    .hero-meta-item .label {
+      font-size: 11px; font-weight: 600; color: var(--cyan);
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .hero-meta-item .value {
+      font-size: 20px; font-weight: 700; color: #fff;
+    }
+
+    .hero-actions {
+      position: relative; z-index: 1;
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-lt), var(--cyan));
+      color: #fff; font-size: 15px; font-weight: 700;
+      border: none; border-radius: 32px; padding: 14px 36px;
+      cursor: pointer; letter-spacing: .5px;
+      box-shadow: 0 8px 32px rgba(46,95,232,.4);
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(46,95,232,.5); }
+    .btn-outline {
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,.3);
+      font-size: 15px; font-weight: 600;
+      border-radius: 32px; padding: 14px 36px;
+      cursor: pointer; letter-spacing: .5px;
+      transition: background .2s, border-color .2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.6); }
+
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.35); font-size: 11px; letter-spacing: 2px;
+    }
+    .hero-scroll .arrow {
+      width: 20px; height: 20px; border-right: 2px solid rgba(255,255,255,.3);
+      border-bottom: 2px solid rgba(255,255,255,.3);
+      transform: rotate(45deg); animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0);} 50%{transform:rotate(45deg) translateY(6px);} }
+
+    /* ─── SECTION COMMON ──────────────────────────────── */
+    section { padding: 100px 24px; }
+    .container { max-width: 1140px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--blue-lt); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      line-height: 1.15; color: var(--gray-800); margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    .section-title .accent {
+      background: linear-gradient(90deg, var(--blue-lt), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-desc {
+      font-size: 17px; line-height: 1.75; color: var(--gray-500);
+      max-width: 620px; font-weight: 300;
+    }
+    .section-header { margin-bottom: 64px; }
+
+    /* ─── WHY SYNC ────────────────────────────────────── */
+    .why-sync { background: var(--gray-100); }
+
+    .pillars {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
+    }
+    .pillar {
+      background: #fff; border-radius: 20px; padding: 36px 32px;
+      border: 1px solid var(--gray-200);
+      transition: transform .25s, box-shadow .25s;
+      position: relative; overflow: hidden;
+    }
+    .pillar::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-lt), var(--cyan));
+      border-radius: 3px 3px 0 0;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .pillar:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(20,40,160,.1); }
+    .pillar:hover::after { transform: scaleX(1); }
+
+    .pillar-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(46,95,232,.1), rgba(0,196,204,.1));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+    }
+    .pillar h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--gray-800); }
+    .pillar p { font-size: 14px; line-height: 1.7; color: var(--gray-500); }
+
+    /* ─── STATS ───────────────────────────────────────── */
+    .stats-band {
+      background: linear-gradient(135deg, var(--blue), var(--dark));
+      padding: 72px 24px;
+    }
+    .stats-grid {
+      max-width: 1140px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px; text-align: center;
+    }
+    .stat-item { padding: 24px; }
+    .stat-number {
+      font-size: clamp(36px, 5vw, 56px); font-weight: 900;
+      background: linear-gradient(90deg, #fff, var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1; margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 13px; font-weight: 500; color: rgba(255,255,255,.6);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    /* ─── PROGRAM ─────────────────────────────────────── */
+    .program { background: var(--white); }
+
+    .timeline {
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: ''; position: absolute; left: 72px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--blue-lt), var(--cyan));
+    }
+
+    .tl-item {
+      display: flex; gap: 32px; padding: 0 0 40px 0; position: relative;
+    }
+    .tl-time {
+      width: 140px; flex-shrink: 0; text-align: right;
+      padding-top: 6px;
+      font-size: 13px; font-weight: 600; color: var(--blue-lt); letter-spacing: .5px;
+    }
+    .tl-dot {
+      position: absolute; left: 64px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-lt), var(--cyan));
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 3px rgba(46,95,232,.2);
+      top: 6px; z-index: 1;
+    }
+    .tl-content {
+      flex: 1;
+      background: var(--gray-100); border-radius: 16px; padding: 24px 28px;
+      border-left: 3px solid transparent;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .tl-content:hover {
+      border-color: var(--blue-lt);
+      box-shadow: 0 8px 32px rgba(20,40,160,.08);
+    }
+    .tl-content.highlight {
+      background: linear-gradient(135deg, rgba(20,40,160,.06), rgba(0,196,204,.06));
+      border: 1px solid rgba(46,95,232,.2);
+    }
+    .tl-tag {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      background: rgba(46,95,232,.12); color: var(--blue-lt);
+      border-radius: 6px; padding: 3px 10px; margin-bottom: 8px;
+    }
+    .tl-tag.gold { background: rgba(242,169,0,.15); color: var(--gold); }
+    .tl-tag.cyan { background: rgba(0,196,204,.12); color: #009da3; }
+    .tl-content h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .tl-content p { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+
+    /* ─── SPEAKERS ────────────────────────────────────── */
+    .speakers { background: var(--gray-100); }
+
+    .speaker-tabs {
+      display: flex; gap: 0; margin-bottom: 48px;
+      background: var(--gray-200); border-radius: 12px; padding: 4px;
+      width: fit-content;
+    }
+    .tab-btn {
+      padding: 10px 28px; border: none; background: transparent;
+      font-size: 14px; font-weight: 600; color: var(--gray-500);
+      border-radius: 10px; cursor: pointer; transition: .2s;
+    }
+    .tab-btn.active {
+      background: #fff; color: var(--blue-lt);
+      box-shadow: 0 2px 12px rgba(20,40,160,.1);
+    }
+
+    .speaker-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px;
+    }
+    .speaker-card {
+      background: #fff; border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .speaker-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(20,40,160,.1); }
+
+    .speaker-avatar {
+      height: 160px; position: relative; overflow: hidden;
+    }
+    .avatar-bg {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 56px;
+    }
+    .speaker-info { padding: 20px; }
+    .speaker-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .speaker-role { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+    .speaker-topic {
+      margin-top: 12px; font-size: 12px; font-weight: 500;
+      color: var(--blue-lt); background: rgba(46,95,232,.08);
+      border-radius: 8px; padding: 6px 10px; line-height: 1.5;
+    }
+
+    /* Speaker tabs content */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ─── AWARDS ──────────────────────────────────────── */
+    .awards { background: var(--white); }
+
+    .awards-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px;
+    }
+    .award-card {
+      border-radius: 20px; padding: 36px 28px; text-align: center;
+      position: relative; overflow: hidden;
+      border: 1px solid var(--gray-200);
+      transition: transform .25s;
+    }
+    .award-card:hover { transform: translateY(-6px); }
+    .award-card.gold-card {
+      background: linear-gradient(135deg, #fffbea, #fff8d1);
+      border-color: rgba(242,169,0,.3);
+    }
+    .award-card.silver-card {
+      background: linear-gradient(135deg, #f5f7fa, #eceff5);
+      border-color: rgba(100,120,180,.2);
+    }
+    .award-card.special-card {
+      background: linear-gradient(135deg, #edf4ff, #e0ecff);
+      border-color: rgba(46,95,232,.2);
+    }
+    .award-trophy { font-size: 48px; margin-bottom: 16px; }
+    .award-name { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .award-desc { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+
+    /* ─── CLUSTER ─────────────────────────────────────── */
+    .cluster { background: var(--gray-100); }
+
+    .cluster-map {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 24px; align-items: start;
+    }
+
+    .cluster-list { display: flex; flex-direction: column; gap: 12px; }
+    .cluster-item {
+      background: #fff; border-radius: 14px; padding: 16px 20px;
+      border: 1px solid var(--gray-200);
+      display: flex; align-items: center; gap: 14px;
+      transition: box-shadow .2s;
+    }
+    .cluster-item:hover { box-shadow: 0 8px 24px rgba(20,40,160,.08); }
+    .cluster-item .icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(46,95,232,.1), rgba(0,196,204,.1));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .cluster-item .text .name { font-size: 14px; font-weight: 700; }
+    .cluster-item .text .sub { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+    .cluster-center {
+      background: linear-gradient(135deg, var(--blue), var(--dark));
+      border-radius: 24px; padding: 48px 36px; text-align: center;
+      color: #fff; position: relative; overflow: hidden;
+    }
+    .cluster-center::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(0,196,204,.2), transparent 60%);
+    }
+    .cluster-center .big-text {
+      font-size: 52px; font-weight: 900; letter-spacing: -2px;
+      line-height: 1; margin-bottom: 8px; position: relative; z-index: 1;
+    }
+    .cluster-center .sub-text {
+      font-size: 13px; color: rgba(255,255,255,.6); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 32px; position: relative; z-index: 1;
+    }
+    .connections {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .conn-chip {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px; padding: 6px 14px;
+      font-size: 12px; font-weight: 500; color: rgba(255,255,255,.85);
+    }
+
+    /* ─── REGISTER ────────────────────────────────────── */
+    .register {
+      background: linear-gradient(160deg, var(--dark) 0%, #0d1f5c 60%, #0c3070 100%);
+      padding: 100px 24px;
+      position: relative; overflow: hidden;
+    }
+    .register::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(46,95,232,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,95,232,.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .register-wrap {
+      max-width: 760px; margin: 0 auto; position: relative; z-index: 1;
+    }
+    .register-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      color: var(--cyan); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .register-title {
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      color: #fff; line-height: 1.15; margin-bottom: 16px; letter-spacing: -1px;
+    }
+    .register-desc {
+      font-size: 16px; color: rgba(255,255,255,.6); line-height: 1.7;
+      margin-bottom: 48px; font-weight: 300;
+    }
+
+    .form-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px; padding: 40px;
+      backdrop-filter: blur(12px);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,.6);
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px; padding: 12px 16px;
+      color: #fff; font-size: 14px;
+      transition: border-color .2s, background .2s;
+      outline: none; width: 100%;
+      font-family: inherit;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--cyan);
+      background: rgba(0,196,204,.07);
+    }
+    .form-group select option { background: var(--dark); color: #fff; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .session-checks {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      margin-top: 4px;
+    }
+    .session-check {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px; padding: 10px 14px;
+      cursor: pointer; transition: .2s;
+    }
+    .session-check:hover { background: rgba(255,255,255,.1); }
+    .session-check input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--cyan);
+      flex-shrink: 0; padding: 0;
+    }
+    .session-check span { font-size: 13px; color: rgba(255,255,255,.8); }
+
+    .form-divider {
+      height: 1px; background: rgba(255,255,255,.08); margin: 24px 0;
+    }
+
+    .privacy-check {
+      display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px;
+    }
+    .privacy-check input[type="checkbox"] {
+      width: 18px; height: 18px; accent-color: var(--cyan);
+      flex-shrink: 0; margin-top: 2px; padding: 0;
+    }
+    .privacy-check span {
+      font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.6;
+    }
+    .privacy-check a { color: var(--cyan); }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--blue-lt), var(--cyan));
+      color: #fff; font-size: 16px; font-weight: 700;
+      border: none; border-radius: 14px; padding: 16px;
+      cursor: pointer; letter-spacing: .5px;
+      box-shadow: 0 8px 32px rgba(46,95,232,.4);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,196,204,.4); }
+
+    .form-note {
+      text-align: center; margin-top: 16px;
+      font-size: 12px; color: rgba(255,255,255,.35);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: #07092e;
+      padding: 48px 24px 32px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .footer-logo {
+      font-size: 22px; font-weight: 900; letter-spacing: 3px;
+      color: #fff; margin-bottom: 8px;
+    }
+    .footer-logo span {
+      background: linear-gradient(90deg, var(--blue-lt), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .footer-sub {
+      font-size: 12px; color: rgba(255,255,255,.3); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 32px;
+    }
+    .footer-links {
+      display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 32px; list-style: none;
+    }
+    .footer-links a {
+      font-size: 13px; color: rgba(255,255,255,.4);
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-copy {
+      font-size: 12px; color: rgba(255,255,255,.2);
+    }
+
+    /* ─── SUCCESS MODAL ───────────────────────────────── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: linear-gradient(135deg, var(--dark), #0d2070);
+      border: 1px solid rgba(0,196,204,.3);
+      border-radius: 24px; padding: 56px 48px; text-align: center;
+      max-width: 440px; width: 90%;
+      animation: modalIn .35s ease;
+    }
+    @keyframes modalIn { from{transform:scale(.85);opacity:0;} to{transform:scale(1);opacity:1;} }
+    .modal-icon { font-size: 64px; margin-bottom: 16px; }
+    .modal h2 { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .modal p { font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.7; margin-bottom: 28px; }
+    .modal-close {
+      background: linear-gradient(135deg, var(--blue-lt), var(--cyan));
+      color: #fff; border: none; border-radius: 12px;
+      padding: 12px 32px; font-size: 15px; font-weight: 700; cursor: pointer;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media(max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .timeline::before { left: 20px; }
+      .tl-time { display: none; }
+      .tl-dot { left: 12px; }
+      .tl-item { padding-left: 48px; gap: 0; }
+      .cluster-map { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .session-checks { grid-template-columns: 1fr; }
+      .dots-grid { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">S²</div>
+    <span>SAMSUNG SYNC</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">행사 소개</a></li>
+    <li><a href="#program">프로그램</a></li>
+    <li><a href="#speakers">연사</a></li>
+    <li><a href="#awards">시상</a></li>
+    <li><a href="#cluster">클러스터</a></li>
+  </ul>
+  <a href="#register" class="nav-cta">참가 신청</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="dots-grid" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="hero-badge">
+    <span class="dot"></span>
+    <span>2026 SAMSUNG SYSTEM LSI</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="samsung">SAMSUNG</span><br/>
+    <span class="sync">SYNC</span>
+  </h1>
+
+  <p class="hero-subtitle-full">S.LSI – University Network for Collaboration</p>
+
+  <p class="hero-desc">
+    산업과 대학이 만나 함께 미래를 설계하는 자리.<br/>
+    혁신적 연구, 현장의 기술, 그리고 사람이 연결됩니다.
+  </p>
+
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="label">DATE</div>
+      <div class="value">2026. 06. 12</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="label">VENUE</div>
+      <div class="value">삼성 서초 R&D 캠퍼스</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="label">참가 인원</div>
+      <div class="value">500+ 명</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="label">SESSIONS</div>
+      <div class="value">6 트랙</div>
+    </div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#register" class="btn-primary">지금 신청하기</a>
+    <a href="#program" class="btn-outline">프로그램 보기</a>
+  </div>
+
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- WHY SYNC -->
+<section class="why-sync" id="why">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Why SYNC?</div>
+      <h2 class="section-title">산업과 대학이 <span class="accent">함께 성장</span>해야 하는 이유</h2>
+      <p class="section-desc">
+        반도체 산업의 빠른 변화 속에서, 대학의 원천 연구와 기업의 현장 기술이 긴밀하게 연결될 때 비로소 真 혁신이 탄생합니다.
+        SAMSUNG SYNC는 그 연결의 시작점입니다.
+      </p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🎓</div>
+        <h3>기초 연구의 가속화</h3>
+        <p>대학의 원천 기술 연구가 산업 현장과 연결되어 더 빠르고 효과적으로 상용화됩니다. 연구실과 팹(Fab)을 잇는 다리를 놓습니다.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤝</div>
+        <h3>인재 네트워크 구축</h3>
+        <p>미래 반도체 리더를 조기에 발굴하고, 산학 공동 프로젝트를 통해 실전 역량을 갖춘 인재를 함께 양성합니다.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🔬</div>
+        <h3>기술 생태계 확장</h3>
+        <p>개방형 혁신을 통해 반도체 설계, AI, 센서, 전력 기술 분야에서 국내 기술 생태계의 저변을 함께 넓혀갑니다.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🌐</div>
+        <h3>글로벌 경쟁력 강화</h3>
+        <p>산학협력을 통해 축적된 지식과 특허가 곧 대한민국 반도체 산업의 글로벌 경쟁력으로 이어집니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number">38+</div>
+      <div class="stat-label">협력 대학</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">210+</div>
+      <div class="stat-label">공동 연구 과제</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">1,400+</div>
+      <div class="stat-label">장학생 배출</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">96%</div>
+      <div class="stat-label">참가 만족도</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">12년</div>
+      <div class="stat-label">산학협력 누적</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAM -->
+<section class="program" id="program">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Program</div>
+      <h2 class="section-title">하루를 <span class="accent">채우는 6개의 세션</span></h2>
+      <p class="section-desc">개회식부터 클러스터 교류까지, 산학의 모든 접점을 경험할 수 있는 풀-데이 프로그램을 준비했습니다.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-time">09:00 – 09:30</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-tag">오프닝</div>
+          <h3>등록 및 개회식</h3>
+          <p>참가자 등록 및 네트워킹 커피 / 삼성전자 System LSI 사업부장 개회사</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">09:30 – 11:00</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content highlight">
+          <div class="tl-tag">기조 강연</div>
+          <h3>🎤 산학협력 기조 강연 — 대학 대표 교수단</h3>
+          <p>반도체 미래 기술 방향, AI 칩 설계의 패러다임 전환, 차세대 전력 반도체를 주제로 각 분야를 대표하는 교수들의 연속 기조 강연이 진행됩니다.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">11:00 – 12:00</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content highlight">
+          <div class="tl-tag">기조 강연</div>
+          <h3>🏢 S.LSI 임원 기조 강연</h3>
+          <p>삼성전자 System LSI 대표 임원들이 사업부의 중장기 기술 전략과 산학협력 비전을 공유합니다. 기업 관점에서 대학과 함께 그려갈 미래를 제시합니다.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">12:00 – 13:30</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-tag cyan">네트워킹</div>
+          <h3>🍽️ 포스터 세션 & 네트워킹 런치</h3>
+          <p>교수·학생·임직원이 함께하는 산학 교류 포스터 세션. 연구 성과물을 자유롭게 소개하고 현장에서 직접 기술 토론이 이루어집니다.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">13:30 – 15:30</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content highlight">
+          <div class="tl-tag">기술 교류</div>
+          <h3>⚙️ 기술 발표 세션 — 산학 공동 연구 성과</h3>
+          <p>대학·기업 공동 연구팀이 올해의 주요 연구 성과를 발표합니다. AI SoC, 이미지센서, 파워IC, 무선 RF 등 분야별 병렬 트랙으로 운영됩니다.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">15:30 – 16:30</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content highlight">
+          <div class="tl-tag gold">시상식</div>
+          <h3>🏆 산학협력 우수 성과 시상식</h3>
+          <p>올해의 최우수 산학 연구, 우수 인재상, 기술 사업화 공헌상 등 주요 부문 시상이 진행됩니다. 삼성전자 사업부장 직접 수여.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">16:30 – 18:00</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-tag cyan">클러스터</div>
+          <h3>🔗 클러스터 산학 교류 세션</h3>
+          <p>수도권·충청·호남·영남 등 지역 클러스터별로 나뉘어 밀도 있는 소그룹 기술 교류와 협력 과제 발굴 워크숍을 진행합니다.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-time">18:00 –</div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-tag">클로징</div>
+          <h3>🎉 클로징 리셉션</h3>
+          <p>하루를 마무리하는 네트워킹 리셉션. 임직원·교수·학생이 함께하는 자유로운 교류의 시간.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS -->
+<section class="speakers" id="speakers">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Speakers</div>
+      <h2 class="section-title">현장과 강단을 <span class="accent">대표하는 연사들</span></h2>
+      <p class="section-desc">산업 최전선의 임원과 각 분야를 이끄는 대학 교수들이 한 무대에 섭니다.</p>
+    </div>
+
+    <div class="speaker-tabs">
+      <button class="tab-btn active" onclick="switchTab('univ', this)">대학 교수</button>
+      <button class="tab-btn" onclick="switchTab('corp', this)">삼성 임원</button>
+    </div>
+
+    <div id="tab-univ" class="tab-panel active">
+      <div class="speaker-grid">
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#e8f0ff,#c5d8ff);">👨‍🏫</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">김민준 교수</div>
+            <div class="speaker-role">서울대학교 전기정보공학부<br/>반도체 설계 연구실</div>
+            <div class="speaker-topic">AI SoC 아키텍처의 미래: In-Memory Computing 시대</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#e8fff8,#c5f5e8);">👩‍🔬</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">이수진 교수</div>
+            <div class="speaker-role">KAIST 전기및전자공학부<br/>이미지 센서 & 비전 AI 연구실</div>
+            <div class="speaker-topic">차세대 이미지센서: 픽셀 단위 AI 처리</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#fff8e8,#ffe8c5);">👨‍💼</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">박정호 교수</div>
+            <div class="speaker-role">연세대학교 전기전자공학과<br/>전력 반도체 소자 연구실</div>
+            <div class="speaker-topic">GaN·SiC 전력 소자와 에너지 전환 산업</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#f5e8ff,#e0c5ff);">👩‍🏫</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">최유나 교수</div>
+            <div class="speaker-role">포항공과대학교 컴퓨터공학과<br/>NPU 아키텍처 연구실</div>
+            <div class="speaker-topic">엣지 NPU 설계: 에너지 효율과 성능의 균형</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#ffe8e8,#ffc5c5);">👨‍🔬</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">정재원 교수</div>
+            <div class="speaker-role">고려대학교 전기전자공학부<br/>RF/무선통신 집적회로 연구실</div>
+            <div class="speaker-topic">6G 시대를 위한 RFIC 설계 기술</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#e8f8ff,#c5ecff);">👩‍💻</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">한서연 교수</div>
+            <div class="speaker-role">성균관대학교 반도체시스템공학과<br/>오토모티브 반도체 연구실</div>
+            <div class="speaker-topic">자율주행 시대의 차량용 SoC 설계</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-corp" class="tab-panel">
+      <div class="speaker-grid">
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#e8eeff,#c5d0ff);">👔</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">삼성전자 부사장</div>
+            <div class="speaker-role">System LSI 사업부<br/>사업부장</div>
+            <div class="speaker-topic">S.LSI 기술 전략 2030: 대학과 함께 그리는 미래</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#e8fff5,#c5ffe0);">👨‍💼</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">삼성전자 전무</div>
+            <div class="speaker-role">System LSI 설계팀<br/>AI칩 개발실장</div>
+            <div class="speaker-topic">Exynos AI: 온디바이스 AI 시대의 반도체 설계</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#fff5e8,#ffe0c5);">👩‍💼</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">삼성전자 전무</div>
+            <div class="speaker-role">System LSI 이미지센서<br/>개발실장</div>
+            <div class="speaker-topic">ISOCELL 기술 로드맵과 산학 협력 성과</div>
+          </div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <div class="avatar-bg" style="background:linear-gradient(135deg,#f0e8ff,#dcc5ff);">👨‍🔧</div>
+          </div>
+          <div class="speaker-info">
+            <div class="speaker-name">삼성전자 상무</div>
+            <div class="speaker-role">산학협력센터장<br/>인재개발팀</div>
+            <div class="speaker-topic">산학협력 생태계 확대를 위한 삼성의 투자 전략</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards" id="awards">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Awards</div>
+      <h2 class="section-title">한 해의 <span class="accent">빛나는 성과</span>를 시상합니다</h2>
+      <p class="section-desc">산학협력을 통해 이루어진 탁월한 연구와 인재, 그리고 기여에 삼성전자가 감사를 전합니다.</p>
+    </div>
+
+    <div class="awards-grid">
+      <div class="award-card gold-card">
+        <div class="award-trophy">🏆</div>
+        <div class="award-name">최우수 산학 연구상</div>
+        <div class="award-desc">올해 가장 뛰어난 성과를 낸 공동 연구 과제에 수여됩니다. 삼성전자 사업부장이 직접 시상합니다.</div>
+      </div>
+      <div class="award-card silver-card">
+        <div class="award-trophy">🥈</div>
+        <div class="award-name">우수 산학 연구상</div>
+        <div class="award-desc">기술적 완성도와 산업 적용 가능성에서 높은 평가를 받은 연구 과제 2편에 수여됩니다.</div>
+      </div>
+      <div class="award-card special-card">
+        <div class="award-trophy">🌟</div>
+        <div class="award-name">미래 인재상</div>
+        <div class="award-desc">산학 프로젝트에서 두각을 나타낸 대학원생·학부생에게 수여하는 삼성 미래 인재 특별상.</div>
+      </div>
+      <div class="award-card gold-card">
+        <div class="award-trophy">💡</div>
+        <div class="award-name">기술 사업화 공헌상</div>
+        <div class="award-desc">연구 성과가 실제 제품·특허로 이어져 사업화에 기여한 팀에 수여하는 실용 혁신상.</div>
+      </div>
+      <div class="award-card silver-card">
+        <div class="award-trophy">🤝</div>
+        <div class="award-name">파트너십 공로상</div>
+        <div class="award-desc">장기간 긴밀한 협력으로 산학 생태계 발전에 기여한 대학 및 연구실에 수여합니다.</div>
+      </div>
+      <div class="award-card special-card">
+        <div class="award-trophy">🔬</div>
+        <div class="award-name">신진 연구자상</div>
+        <div class="award-desc">산학협력 분야에 첫 발을 내딛으며 탁월한 가능성을 보인 신진 연구자에게 수여합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLUSTER -->
+<section class="cluster" id="cluster">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Cluster Exchange</div>
+      <h2 class="section-title">지역 클러스터 <span class="accent">산학 교류</span></h2>
+      <p class="section-desc">전국 4개 지역 클러스터로 나뉘어 밀도 있는 기술 교류와 차년도 협력 과제를 함께 발굴합니다.</p>
+    </div>
+
+    <div class="cluster-map">
+      <!-- Left universities -->
+      <div class="cluster-list">
+        <div class="cluster-item">
+          <div class="icon">🏛️</div>
+          <div class="text">
+            <div class="name">서울대학교</div>
+            <div class="sub">반도체 설계 · AI SoC</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">🔬</div>
+          <div class="text">
+            <div class="name">KAIST</div>
+            <div class="sub">이미지센서 · 비전 AI</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">⚡</div>
+          <div class="text">
+            <div class="name">연세대학교</div>
+            <div class="sub">전력 반도체 소자</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">📡</div>
+          <div class="text">
+            <div class="name">고려대학교</div>
+            <div class="sub">RF/무선통신 IC</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">🚗</div>
+          <div class="text">
+            <div class="name">성균관대학교</div>
+            <div class="sub">오토모티브 SoC</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center hub -->
+      <div class="cluster-center">
+        <div class="big-text">S.LSI<br/>HUB</div>
+        <div class="sub-text">System LSI Technology Exchange</div>
+        <div class="connections">
+          <span class="conn-chip">AI · NPU</span>
+          <span class="conn-chip">Image Sensor</span>
+          <span class="conn-chip">RF · Comm</span>
+          <span class="conn-chip">Power IC</span>
+          <span class="conn-chip">Auto SoC</span>
+          <span class="conn-chip">EDA · CAD</span>
+          <span class="conn-chip">보안 반도체</span>
+          <span class="conn-chip">차세대 공정</span>
+        </div>
+      </div>
+
+      <!-- Right universities -->
+      <div class="cluster-list">
+        <div class="cluster-item">
+          <div class="icon">💻</div>
+          <div class="text">
+            <div class="name">포항공과대학교</div>
+            <div class="sub">NPU · 컴퓨터 구조</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">🧠</div>
+          <div class="text">
+            <div class="name">한양대학교</div>
+            <div class="sub">임베디드 AI · IoT</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">🔐</div>
+          <div class="text">
+            <div class="name">UNIST</div>
+            <div class="sub">보안 반도체 · 암호화</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">🌱</div>
+          <div class="text">
+            <div class="name">전남대학교</div>
+            <div class="sub">저전력 VLSI 설계</div>
+          </div>
+        </div>
+        <div class="cluster-item">
+          <div class="icon">🏭</div>
+          <div class="text">
+            <div class="name">부산대학교</div>
+            <div class="sub">공정 · 소재 연구</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="register" id="register">
+  <div class="register-wrap">
+    <div class="register-label">Registration</div>
+    <h2 class="register-title">SAMSUNG SYNC 2026에<br/>함께하세요</h2>
+    <p class="register-desc">
+      산업과 대학이 연결되는 특별한 하루. 아래 양식을 작성하시면 담당자가 확인 후 안내 드립니다.
+    </p>
+
+    <div class="form-card">
+      <form id="regForm" onsubmit="handleSubmit(event)">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>성명 *</label>
+            <input type="text" placeholder="홍길동" required />
+          </div>
+          <div class="form-group">
+            <label>소속 기관 *</label>
+            <input type="text" placeholder="삼성전자 / 서울대학교" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>이메일 *</label>
+            <input type="email" placeholder="example@samsung.com" required />
+          </div>
+          <div class="form-group">
+            <label>연락처</label>
+            <input type="tel" placeholder="010-0000-0000" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>참가 구분 *</label>
+            <select required>
+              <option value="" disabled selected>선택하세요</option>
+              <option>삼성전자 임직원</option>
+              <option>대학 교수</option>
+              <option>대학원생 (박사)</option>
+              <option>대학원생 (석사)</option>
+              <option>학부생</option>
+              <option>기타 (산학 관계자)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>소속 부서 / 학과</label>
+            <input type="text" placeholder="System LSI 설계팀 / 전기공학부" />
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-group">
+          <label>참가 희망 세션 (복수 선택 가능)</label>
+          <div class="session-checks">
+            <label class="session-check">
+              <input type="checkbox" /> <span>기조 강연 (대학 교수)</span>
+            </label>
+            <label class="session-check">
+              <input type="checkbox" /> <span>기조 강연 (삼성 임원)</span>
+            </label>
+            <label class="session-check">
+              <input type="checkbox" /> <span>포스터 세션</span>
+            </label>
+            <label class="session-check">
+              <input type="checkbox" /> <span>기술 발표 세션</span>
+            </label>
+            <label class="session-check">
+              <input type="checkbox" /> <span>시상식</span>
+            </label>
+            <label class="session-check">
+              <input type="checkbox" /> <span>클러스터 교류 세션</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-group">
+          <label>포스터 / 발표 등록</label>
+          <select>
+            <option value="">해당 없음</option>
+            <option>포스터 발표 신청</option>
+            <option>기술 발표 신청</option>
+            <option>산학 연구 성과 시상 추천 신청</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>사전 질문 / 기대 사항</label>
+          <textarea placeholder="행사에 대한 질문이나 기대하시는 내용을 자유롭게 작성해 주세요."></textarea>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="privacy-check">
+          <input type="checkbox" id="privacy" required />
+          <span>
+            <strong style="color:rgba(255,255,255,.75)">개인정보 수집 및 이용에 동의합니다.</strong><br/>
+            입력하신 개인정보는 행사 운영 목적으로만 사용되며, 행사 종료 후 파기됩니다.
+            자세한 내용은 <a href="#">개인정보처리방침</a>을 확인하세요.
+          </span>
+        </div>
+
+        <button type="submit" class="btn-submit">참가 신청 완료하기 →</button>
+        <p class="form-note">신청 완료 후 등록하신 이메일로 확인 메일이 발송됩니다.</p>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SAMSUNG <span>SYNC</span></div>
+  <div class="footer-sub">S.LSI – University Network for Collaboration · 2026</div>
+  <ul class="footer-links">
+    <li><a href="#">행사 소개</a></li>
+    <li><a href="#">프로그램</a></li>
+    <li><a href="#">연사 소개</a></li>
+    <li><a href="#">시상 안내</a></li>
+    <li><a href="#">오시는 길</a></li>
+    <li><a href="#">개인정보처리방침</a></li>
+    <li><a href="#">문의하기</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Samsung Electronics Co., Ltd. System LSI Business. All rights reserved.</div>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">✅</div>
+    <h2>신청이 완료되었습니다!</h2>
+    <p>SAMSUNG SYNC 2026에 신청해 주셔서 감사합니다.<br/>등록하신 이메일로 확인 메일을 발송했습니다.<br/>행사에서 뵙겠습니다! 🎉</p>
+    <button class="modal-close" onclick="closeModal()">확인</button>
+  </div>
+</div>
+
+<script>
+  // Tab switching
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Form submission
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('successModal').classList.add('show');
+  }
+  function closeModal() {
+    document.getElementById('successModal').classList.remove('show');
+    document.getElementById('regForm').reset();
+  }
+
+  // Smooth nav highlight on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--cyan)' : 'rgba(255,255,255,.7)';
+    });
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pillar, .speaker-card, .award-card, .tl-content, .cluster-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
